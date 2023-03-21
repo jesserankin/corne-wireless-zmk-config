@@ -9,6 +9,32 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+
+        &mt {
+                tapping-term-ms = <150>;
+                flavor = "tap-preferred";
+        };
+
+        &lt {
+                tapping-term-ms = <150>;
+                flavor = "tap-preferred";
+        };
+
+
+
+        behaviors {
+                space_mt: space_bar_mod_tap {
+                compatible = "zmk,behavior-hold-tap";
+                label = "SPACE_BAR_MOD_TAP";
+                // #binding-cells = <2>;
+                flavor = "tap-preferred";
+                tapping-term-ms = <500>;
+                // quick-tap-ms = <200>;
+                bindings = <&kp>, <&kp>;
+                // hold-trigger-key-positions = <1>;    // <---[[the W key]]
+                };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
@@ -22,7 +48,7 @@
    &kp EQUAL  &kp Q  &kp W   &kp E  &kp R       &kp T          &kp Y        &kp U       &kp I      &kp O    &kp P     &kp LGUI
    &kp LPAR   &kp A  &kp S   &kp D  &kp F       &kp G          &kp H        &kp J       &kp K      &kp L    &kp SEMI  &kp SQT
    &kp RPAR   &kp Z  &kp X   &kp C  &mt LALT V  &mt LCTRL B    &mt RCTRL N  &mt RALT M  &kp COMMA  &kp DOT  &kp FSLH  &kp MINUS
-                           &kp BSPC  &lt 2 SPACE  &lt 1 ESC    &lt 1 TAB  &mt RSHIFT SPACE  &kp RET
+                           &kp BSPC  &lt 2 SPACE  &lt 1 ESC    &lt 1 TAB  &space_mt RSHIFT SPACE  &kp RET
                         >;
                 };
                 
