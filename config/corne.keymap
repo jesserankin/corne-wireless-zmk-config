@@ -72,7 +72,7 @@
                         bindings = <
    &kp GRAVE  &kp GT     &kp PIPE  &kp HASH   &kp LBKT  &kp RBKT    &kp N7  &kp N8  &kp N9  &kp KP_MULTIPLY  &kp KP_PLUS   &trans
    &trans     &kp TILDE  &kp AMPS  &kp PRCNT  &kp LBRC  &kp RBRC    &kp N4  &kp N5  &kp N6  &kp KP_DIVIDE    &kp KP_MINUS  &kp EQUAL
-   &trans     &kt BSLH   &kp EXCL  &kp AT     &kp CRRT  &kp DLLR    &kp N1  &kp N2  &kp N3  &trans           &trans        &trans
+   &trans     &kp BSLH   &kp EXCL  &kp AT     &kp CRRT  &kp DLLR    &kp N1  &kp N2  &kp N3  &trans           &trans        &trans
                                           &trans  &trans  &trans    &trans  &kp N0  &trans
                         >;
                 };
