@@ -44,6 +44,45 @@
                                 , <&macro_release &kp LALT>
                                 ;
                 };
+                win_layer_left: win_layer_left {
+                        label = "WIN_LAYER_LEFT";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings
+                                = <&macro_press &kp LGUI &mo 3>
+                                , <&macro_pause_for_release>
+                                , <&macro_release &kp LGUI &mo 3>
+                                ;
+                };
+                win_layer_right: win_layer_right {
+                        label = "WIN_LAYER_RIGHT";
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings
+                                = <&macro_press &kp LGUI &mo 4>
+                                , <&macro_pause_for_release>
+                                , <&macro_release &kp LGUI &mo 4>
+                                ;
+                };
+        };
+
+        behaviors {
+                win_left: win_left {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "WIN_LEFT";
+                        #binding-cells = <1>;
+                        tapping-term-ms = <150>;
+                        flavor = "tap-preferred";
+                        bindings = <&win_layer_left>, <&kp>;
+                };
+                win_right: win_right {
+                        compatible = "zmk,behavior-hold-tap";
+                        label = "WIN_RIGHT";
+                        #binding-cells = <1>;
+                        tapping-term-ms = <150>;
+                        flavor = "tap-preferred";
+                        bindings = <&win_layer_right>, <&kp>;
+                };
         };
 
         keymap {
@@ -58,7 +97,7 @@
                         bindings = <
    &kp EQUAL  &kp Q  &kp W   &kp E       &kp R        &kp T          &kp Y        &kp U        &kp I           &kp O    &kp P     &kp LGUI
    &kp LPAR   &kp A  &kp S   &kp D       &kp F        &kp G          &kp H        &kp J        &kp K           &kp L    &kp SEMI  &kp MINUS
-   &kp RPAR   &kp Z  &kp X   &mt LALT C  &mt LCTRL V  &lt 3 B    &lt 4 N  &mt RCTRL M  &mt RALT COMMA  &kp DOT  &kp FSLH  &kp SQT
+   &kp RPAR   &kp Z  &kp X   &mt LALT C  &mt LCTRL V  &win_left B    &win_right N  &mt RCTRL M  &mt RALT COMMA  &kp DOT  &kp FSLH  &kp SQT
                                 &kp BSPC  &lt 2 SPACE  &lt 1 ESC    &lt 1 TAB  &mt RSHIFT SPACE  &kp RET
                         >;
                 };
@@ -70,7 +109,7 @@
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
-   &kp GRAVE  &kp GT     &kp PIPE  &kp HASH   &kp LBKT  &kp RBKT    &kp N7  &kp N8  &kp N9  &kp KP_MULTIPLY  &kp KP_PLUS   &trans
+   &kp GRAVE  &kp GT     &kp PIPE  &kp HASH   &kp LBKT  &kp RBKT    &kp N7  &kp N8  &kp N9  &kp KP_MULTIPLY  &kp KP_PLUS   &kp LC(LA(DEL))
    &trans     &kp TILDE  &kp AMPS  &kp PRCNT  &kp LBRC  &kp RBRC    &kp N4  &kp N5  &kp N6  &kp KP_DIVIDE    &kp KP_MINUS  &kp EQUAL
    &trans     &kp BSLH   &kp EXCL  &kp AT     &kp CRRT  &kp DLLR    &kp N1  &kp N2  &kp N3  &trans           &trans        &trans
                                           &trans  &trans  &trans    &trans  &kp N0  &trans
@@ -86,33 +125,35 @@
    &kp F1      &kp F2        &kp F3        &kp F4        &kp F5        &kp F6          &kp F7    &kp F8    &kp F9  &kp F10    &kp F11  &kp F12
    &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans   &trans
    &trans      &trans        &trans        &trans        &kp TAB       &kp GRAVE       &kp HOME  &kp END   &trans  &trans     &trans   &trans
-                                                            &trans  &trans  &trans    &start_alt_grave  &start_alt_tab  &kp LGUI
+                                                            &trans  &trans  &trans    &start_alt_grave  &start_alt_tab  &trans
                         >;
                 };
 
                 left_win_layer {
 // -----------------------------------------------------------------------------------------
-// LEFT WIN Layer - Hold LEFT B to activate, all keys send WIN+key
-// Right side has full number pad WIN+7,8,9 / WIN+4,5,6 / WIN+1,2,3
-//                    | WIN+BKSP | WIN+SPC | WIN+ESC |   | WIN+TAB | WIN+SPC | WIN+RET |
+// LEFT WIN Layer - Hold B to activate (macro holds LGUI)
+// Plain keys combine with held LGUI. SHIFT/ALT on left thumbs for same-hand combos.
+// Right side has numbers for workspaces. Use CTRL+4/5/6/L for movement.
+//                    | BSPC | SHIFT | ALT |   | TAB | SPACE | RET |
                         bindings = <
-   &kp LG(EQUAL)  &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)    &kp LG(N7)  &kp LG(N8)  &kp LG(N9)  &kp LG(O)    &kp LG(P)     &trans
-   &kp LG(LPAR)   &kp LG(A)  &kp LG(S)  &kp LG(D)  &kp LG(F)  &kp LG(G)    &kp LG(N4)  &kp LG(N5)  &kp LG(N6)  &kp LG(L)    &kp LG(SEMI)  &trans
-   &kp LG(RPAR)   &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans       &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(DOT)  &kp LG(FSLH)  &trans
-                                        &kp LG(BSPC)  &kp LG(SPACE)  &kp LG(ESC)    &kp LG(TAB)  &kp LG(N0)  &kp LG(RET)
+   &kp EQUAL  &kp Q  &kp W  &kp E       &kp R        &kp T       &kp N7  &kp N8  &kp N9  &kp O    &kp P     &trans
+   &kp LPAR   &kp A  &kp S  &kp D       &kp F        &kp G       &kp N4  &kp N5  &kp N6  &kp L    &kp SEMI  &kp MINUS
+   &kp RPAR   &kp Z  &kp X  &mt LALT C  &mt LCTRL V  &none       &kp N1  &kp N2  &kp N3  &kp DOT  &kp FSLH  &trans
+                                        &kp BSPC  &kp LSHIFT  &kp LALT    &kp TAB  &kp SPACE  &kp RET
                         >;
                 };
 
                 right_win_layer {
 // -----------------------------------------------------------------------------------------
-// RIGHT WIN Layer - Hold RIGHT N to activate, all keys send WIN+key
-// All letter keys with WIN modifier (so you can press WIN+B with right hand)
-//                    | WIN+BKSP | WIN+SPC | WIN+ESC |   | WIN+TAB | WIN+SPC | WIN+RET |
+// RIGHT WIN Layer - Hold N to activate (macro holds LGUI)
+// Plain keys combine with held LGUI. SHIFT/ALT on right thumbs for same-hand combos.
+// All letter keys accessible (including B). Use for SUPER+J/K and other letter combos.
+//                    | BSPC | SPACE | ESC |   | ALT | SHIFT | RET |
                         bindings = <
-   &kp LG(EQUAL)  &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)    &kp LG(Y)  &kp LG(U)  &kp LG(I)      &kp LG(O)    &kp LG(P)     &trans
-   &kp LG(LPAR)   &kp LG(A)  &kp LG(S)  &kp LG(D)  &kp LG(F)  &kp LG(G)    &kp LG(H)  &kp LG(J)  &kp LG(K)      &kp LG(L)    &kp LG(SEMI)  &trans
-   &kp LG(RPAR)   &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &kp LG(B)    &trans     &kp LG(M)  &kp LG(COMMA)  &kp LG(DOT)  &kp LG(FSLH)  &trans
-                                        &kp LG(BSPC)  &kp LG(SPACE)  &kp LG(ESC)    &kp LG(TAB)  &kp LG(SPACE)  &kp LG(RET)
+   &kp EQUAL  &kp Q  &kp W  &kp E       &kp R        &kp T    &kp Y  &kp U  &kp I      &kp O    &kp P     &trans
+   &kp LPAR   &kp A  &kp S  &kp D       &kp F        &kp G    &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp MINUS
+   &kp RPAR   &kp Z  &kp X  &mt LALT C  &mt LCTRL V  &kp B    &none  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &trans
+                                        &kp BSPC  &kp SPACE  &kp ESC    &kp LALT  &kp LSHIFT  &kp RET
                         >;
                 };
 
