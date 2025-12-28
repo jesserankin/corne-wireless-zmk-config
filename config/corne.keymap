@@ -132,14 +132,14 @@
                 left_win_layer {
 // -----------------------------------------------------------------------------------------
 // LEFT WIN Layer - Hold B to activate (macro holds LGUI)
-// Plain keys combine with held LGUI. SHIFT/ALT on left thumbs for same-hand combos.
-// Right side has numbers for workspaces. Use CTRL+4/5/6/L for movement.
-//                    | BSPC | SHIFT | ALT |   | TAB | SPACE | RET |
+// All letters accessible. Hold inner left thumb (mo 5) for numbers.
+// SHIFT on middle left thumb. Use C for ALT, V for CTRL.
+//                    | BSPC | SHIFT | NUM |   | TAB | SPACE | RET |
                         bindings = <
-   &kp EQUAL  &kp Q  &kp W  &kp E       &kp R        &kp T       &kp N7  &kp N8  &kp N9  &kp O    &kp P     &trans
-   &kp LPAR   &kp A  &kp S  &kp D       &kp F        &kp G       &kp N4  &kp N5  &kp N6  &kp L    &kp SEMI  &kp MINUS
-   &kp RPAR   &kp Z  &kp X  &mt LALT C  &mt LCTRL V  &none       &kp N1  &kp N2  &kp N3  &kp DOT  &kp FSLH  &trans
-                                        &kp BSPC  &kp LSHIFT  &kp LALT    &kp TAB  &kp SPACE  &kp RET
+   &kp EQUAL  &kp Q  &kp W  &kp E       &kp R        &kp T    &kp Y  &kp U  &kp I      &kp O    &kp P     &trans
+   &kp LPAR   &kp A  &kp S  &kp D       &kp F        &kp G    &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp MINUS
+   &kp RPAR   &kp Z  &kp X  &mt LALT C  &mt LCTRL V  &none    &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &trans
+                                        &kp BSPC  &kp LSHIFT  &mo 5    &kp TAB  &kp SPACE  &kp RET
                         >;
                 };
 
@@ -154,6 +154,19 @@
    &kp LPAR   &kp A  &kp S  &kp D       &kp F        &kp G    &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp MINUS
    &kp RPAR   &kp Z  &kp X  &mt LALT C  &mt LCTRL V  &kp B    &none  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &trans
                                         &kp BSPC  &kp SPACE  &kp ESC    &kp LALT  &kp LSHIFT  &kp RET
+                        >;
+                };
+
+                win_num_layer {
+// -----------------------------------------------------------------------------------------
+// WIN Numbers Layer - Activated by holding inner left thumb on left_win_layer
+// Provides numbers for workspace switching while LGUI is held from win macro.
+// Numbers on right side in numpad layout: 7,8,9 / 4,5,6 / 1,2,3
+                        bindings = <
+   &trans  &trans  &trans  &trans  &trans  &trans    &kp N7  &kp N8  &kp N9  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans    &kp N4  &kp N5  &kp N6  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans    &kp N1  &kp N2  &kp N3  &trans  &trans  &trans
+                                   &trans  &trans  &trans    &trans  &kp N0  &trans
                         >;
                 };
 
